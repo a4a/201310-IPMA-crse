@@ -1,0 +1,8 @@
+\beamer@endinputifotherversion {3.10pt}
+\beamer@sectionintoc {1}{FLR ??}{2}{0}{1}
+\beamer@sectionintoc {2}{FLQuant}{4}{0}{2}
+\beamer@sectionintoc {3}{FLStock}{5}{0}{3}
+\beamer@sectionintoc {4}{FLIndex}{6}{0}{4}
+\beamer@sectionintoc {5}{FLSR}{7}{0}{5}
+\beamer@sectionintoc {6}{FLR Lists}{8}{0}{6}
+\beamer@sectionintoc {7}{Example}{9}{0}{7}

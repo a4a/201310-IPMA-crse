@@ -1,0 +1,222 @@
+\documentclass{beamer}% usefull options [handout]
+\usepackage{graphicx}
+\usepackage{amsmath}
+%\useoutertheme{infolines}
+\usetheme{Hannover}% other nice themes Hannover, CambridgeUS, AnnArbor, Madrid, PaloAlto, Malmoe, Rochester 
+\usecolortheme{beetle}% other options "dove"
+\usefonttheme{structuresmallcapsserif}
+\setbeamertemplate{items}[triangle] % other options "circle", "ball", "square"
+%\setbeamertemplate{blocks}[rounded][shadow=true]
+%\setbeamertemplate{navigation symbols}{}
+%\useoutertheme[height=20pt]{sidebar}
+% NOTE: this theme inverts colors, if one wants to use common colors it's necessary
+% to comment the code on the chunk about lattice settings  
+\setbeamercolor{normal text}{fg=white,bg=black}% inverted black background white foreground
+\setbeamercolor*{palette sidebar secondary}{fg=white}
+
+%************ Title & Author ***********************
+\title[FLR in 10 slides]{FLR in 10 slides or less}
+\author{Ernesto Jardim}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+%===========================================
+% some code we need 
+%===========================================
+<<echo=FALSE>>=
+# source("run.R")
+library(FLCore)
+data(ple4)
+@
+
+%*******************************************
+\begin{frame}%[plain]
+\titlepage
+\begin{flushright}
+	\includegraphics[width=0.1\textwidth]{cc.png}
+\end{flushright}
+\end{frame}
+
+%*******************************************
+% \begin{frame}
+% \frametitle{Outline}
+% \tableofcontents
+% \end{frame}
+
+%===========================================
+% INTRODUCTION
+%===========================================
+\section{FLR ??}
+%*******************************************
+\begin{frame}
+   \frametitle{What is FLR ?}
+\begin{itemize}
+	\item FLR = Fisheries Libraries in R
+	\item FLR is a set of R packages
+	\item FLR is developed and maintained by a group of fisheries scientists
+\end{itemize}
+
+\end{frame}
+
+%*******************************************
+\begin{frame}
+   \frametitle{Packages}
+<<fig=TRUE, echo=FALSE>>=
+par(mai=c(0.2, 0.2, 0.5, 0.2), lwd=2)
+plot(seq(3, 13, len=2)~seq(1, 8, len=2), type="n", xlab="", ylab="", main="FLR packages' development model", axes=FALSE)
+segments(2, 10, 7, 10, lwd=2, col="white")
+segments(2, 10, 2, 8, lwd=2, col="white")
+segments(7, 10, 7, 6, lwd=2, col="white")
+segments(4.5, 12, 4.5, 6, lwd=2, col="white")
+segments(3.8, 6, 5.2, 6, lwd=2, col="white")
+segments(3.8, 6, 3.8, 4, lwd=2, col="white")
+segments(5.2, 6, 5.2, 4, lwd=2, col="white")
+points(4.5, 12, pch=21, cex=12, bg="white")
+points(2, 8, pch=22, cex=12, bg="white")
+points(4.5, 8, pch=21, cex=12, bg="white")
+points(3.8, 4, pch=22, cex=12, bg="white")
+points(5.2, 4, pch=22, cex=12, bg="white")
+points(7, 8, pch=22, cex=12, bg="white")
+points(7, 6, pch=22, cex=12, bg="white")
+text(4.5, 12, "FLCore", font=2, cex=0.9)
+text(2, 8, "FLa4a", font=2, cex=0.9)
+text(4.5, 8, "FLAssess", font=2, cex=0.9)
+text(3.8, 4, "FLXSA", font=2, cex=0.9)
+text(5.2, 4, "FLBioDyn", font=2, cex=0.9)
+text(7, 8, "FLash", font=2, cex=0.9)
+text(7, 6, "FLBRP", font=2, cex=0.9)
+@
+\end{frame}
+
+
+%-------------------------------------------
+% FLQuant
+%-------------------------------------------
+\section{FLQuant}
+%*******************************************
+\begin{frame}[containsverbatim]
+  \frametitle{FLQuant}
+
+Stands for "FL quantity" and it's the smallest component of FLR classes.\newline 
+
+Six dimensional array used to store data of a particular type (e.g. catch numbers), with the following dimensions:\newline
+
+% Dimensions are:
+% \begin{enumerate}
+% 	\item User defined (age, length etc.)
+% 	\item Year
+% 	\item Unit (substocks, male/female)
+% 	\item Season
+% 	\item Area
+% 	\item Iter
+% \end{enumerate}
+{\scriptsize{
+<<results=verbatim,echo=FALSE>>=
+names(dimnames(FLQuant()))
+#FLQuant()
+@
+}}
+
+
+\end{frame}
+
+%-------------------------------------------
+% FLStock
+%-------------------------------------------
+\section{FLStock}
+%***************************************
+\begin{frame}[containsverbatim]
+  \frametitle{FLStock}
+Represents a fish stock and comprises a number of slots.
+{\scriptsize{
+<<results=verbatim,echo=TRUE>>=
+showClass("FLStock")
+@ %def 
+}}
+\end{frame}
+
+%-------------------------------------------
+% FLIndex
+%-------------------------------------------
+\section{FLIndex}
+%***************************************
+\begin{frame}[containsverbatim]
+  \frametitle{FLIndex}
+Represents a index (e.g. index of abundance from a survey)
+{\scriptsize{
+<<results=verbatim,echo=TRUE>>=
+showClass("FLIndex")
+@ %def 
+}}
+
+\end{frame}
+
+%-------------------------------------------
+% FLSR
+%-------------------------------------------
+\section{FLSR}
+%***************************************
+\begin{frame}[containsverbatim]
+  \frametitle{FLSR}
+Represents a stock-recruitment relationship and allows the estimation of its parameters.
+{\scriptsize{
+<<results=verbatim,echo=TRUE>>=
+showClass("FLSR")
+@ %def 
+}}
+\end{frame}
+
+%-------------------------------------------
+% FLlst
+%-------------------------------------------
+\section{FLR Lists}
+%***************************************
+\begin{frame}[containsverbatim]
+  \frametitle{FLlist}
+A list of other classes
+{\scriptsize{
+<<results=verbatim,echo=TRUE>>=
+showClass("FLlst")
+@ %def 
+}}
+
+\end{frame}
+
+\section{Example}
+%***************************************
+\begin{frame}[containsverbatim]
+  \frametitle{Example I}
+<<results=verbatim, eval=FALSE>>=
+# load --------------------------------
+library(FLCore)
+data(ple4.index)
+data(ple4)
+# FLStock -----------------------------
+plot(ple4)
+summary(ple4)
+# FLQuant -----------------------------
+cth <- catch(ple4)
+plot(cth)
+summary(cth)
+@
+\end{frame}
+
+\begin{frame}[containsverbatim]
+  \frametitle{Example II}
+<<eval=FALSE>>=
+# FLIndex -----------------------------
+plot(ple4.index)
+summary(ple4.index)
+# FLSR --------------------------------
+ple4.sr <- as.FLSR(ple4, model="bevholt")
+ple4.sr <- fmle(ple4.sr)
+plot(ple4.sr)
+# FLlst -------------------------------
+flqs <- FLQuants(c=catch(ple4), b=stock(ple4))
+xyplot(data~year, groups=qname, data=flqs, 
+	 type="l")
+@
+\end{frame}
+
+\end{document}
+
